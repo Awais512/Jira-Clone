@@ -48,9 +48,10 @@ export const SignUpCard = () => {
       <CardHeader className="flex items-center justify-center text-center p-7">
         <CardTitle className="text-2xl">Signup</CardTitle>
         <CardDescription>
-          By signing up you agree to our{" "}
+          By signing up you agree to our
           <Link href="/privacy">
             <span className="text-blue-700">
+              {" "}
               Privacy Policy and Terms of services
             </span>
           </Link>
@@ -135,6 +136,17 @@ export const SignUpCard = () => {
           <FaGithub className="mr-2 size-5" />
           Sign up with github
         </Button>
+      </CardContent>
+      <div className="px-7">
+        <DottedSeparator />
+      </div>
+      <CardContent className="p-7 flex items-center justify-center">
+        <p>
+          Already have an account?
+          <Link href="/sign-in">
+            <span className="ml-1 text-blue-700">Sign In</span>
+          </Link>
+        </p>
       </CardContent>
     </Card>
   );
