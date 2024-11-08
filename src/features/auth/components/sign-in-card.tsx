@@ -1,3 +1,4 @@
+"use client";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FcGoogle } from "react-icons/fc";
@@ -20,7 +21,7 @@ import { loginSchema } from "../schema";
 import { useLogin } from "../api/use-login";
 
 export const SignInCard = () => {
-  const { mutate } = useLogin();
+  const { mutate, isPending } = useLogin();
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -78,7 +79,7 @@ export const SignInCard = () => {
               )}
             />
 
-            <Button size="lg" disabled={false} className="w-full">
+            <Button disabled={isPending} size="lg" className="w-full">
               Login
             </Button>
           </form>
@@ -89,10 +90,10 @@ export const SignInCard = () => {
       </div>
       <CardContent className="p-7 flex flex-col gap-y-4">
         <Button
+          disabled={isPending}
           variant="secondary"
           size="lg"
           className="w-full"
-          disabled={false}
         >
           <FcGoogle className="mr-2 size-5" />
           Login with google
@@ -101,7 +102,7 @@ export const SignInCard = () => {
           variant="secondary"
           size="lg"
           className="w-full"
-          disabled={false}
+          disabled={isPending}
         >
           <FaGithub className="mr-2 size-5" />
           Login with github
