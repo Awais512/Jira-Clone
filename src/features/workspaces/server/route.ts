@@ -4,7 +4,6 @@ import { createWorkspaceSchema } from "../schema";
 import { sessionMiddleware } from "@/lib/sessionMiddleware";
 import { DATABASES_ID, WORKSPACES_ID } from "@/config";
 import { ID } from "node-appwrite";
-import { json } from "stream/consumers";
 
 const app = new Hono().post(
   "/",
@@ -20,7 +19,7 @@ const app = new Hono().post(
       DATABASES_ID,
       WORKSPACES_ID,
       ID.unique(),
-      { name }
+      { name, userId: user.$id }
     );
 
     return c.json({ data: workspace });
