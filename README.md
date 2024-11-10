@@ -1,36 +1,130 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jira Clone
 
-## Getting Started
+A modern project management tool inspired by Jira, built with cutting-edge technologies. This application provides a robust platform for task management, team collaboration, and project tracking.
 
-First, run the development server:
+## 🚀 Tech Stack
 
+- **Frontend Framework:** Next.js 14 (App Router)
+- **API Framework:** Hono
+- **Styling:** TailwindCSS
+- **UI Components:** Shadcn UI
+- **Type Safety:** TypeScript
+- **Backend/Database:** Appwrite
+
+## ✨ Features
+
+- Drag-and-drop task management
+- Real-time updates
+- Custom board views
+- Project and sprint management
+- User authentication and authorization
+- Rich text editor for task descriptions
+- File attachments
+- Activity tracking
+- Search and filter capabilities
+- Type-safe API endpoints with Hono
+- Middleware support for authentication and validation
+- Edge-ready API routes
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed:
+- Node.js (v18 or higher)
+- npm or yarn
+- Appwrite instance (local or cloud)
+
+## 🛠️ Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/jira-clone.git
+cd jira-clone
+```
+
+2. Install dependencies
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Configure environment variables
+```bash
+cp .env.example .env.local
+```
+
+Fill in your Appwrite credentials:
+```env
+NEXT_PUBLIC_APPWRITE_ENDPOINT=
+NEXT_PUBLIC_APPWRITE_PROJECT_ID=
+NEXT_PUBLIC_APPWRITE_DATABASE_ID=
+```
+
+4. Start the development server
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔗 API Routes (Hono)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The project uses Hono for type-safe API routes. Here's an example of how the API is structured:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```typescript
+// app/api/hono.ts
+import { Hono } from 'hono'
+import { handle } from 'hono/vercel'
 
-## Learn More
+const app = new Hono().basePath('/api')
 
-To learn more about Next.js, take a look at the following resources:
+app.use('/*', async (c, next) => {
+  // Common middleware (auth, logging, etc.)
+  await next()
+})
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+app.get('/projects', async (c) => {
+  // Handle GET projects
+})
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+app.post('/tasks', async (c) => {
+  // Handle POST tasks
+})
 
-## Deploy on Vercel
+export const GET = handle(app)
+export const POST = handle(app)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔐 Authentication
+
+This project uses Appwrite Authentication for user management. Supported methods include:
+- Email/Password
+- Google OAuth
+- GitHub OAuth
+
+
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
+## 🙏 Acknowledgments
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Hono](https://hono.dev)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Shadcn UI](https://ui.shadcn.com)
+- [Appwrite](https://appwrite.io)
+
+## 📞 Support
+
+For support, please create an issue in the repository or reach out to the maintainers.
