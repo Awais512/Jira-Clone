@@ -4,33 +4,32 @@ import { InferRequestType, InferResponseType } from "hono";
 import { toast } from "sonner";
 
 type ResponseType = InferResponseType<
-  (typeof client.api.workspaces)[":workspaceId"]["$delete"],
+  (typeof client.api.members)[":memberId"]["$delete"],
   200
 >;
 type RequestType = InferRequestType<
-  (typeof client.api.workspaces)[":workspaceId"]["$delete"]
+  (typeof client.api.members)[":memberId"]["$delete"]
 >;
 
-export const useDeleteWorkspace = () => {
+export const useDeleteMember = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async ({ param }) => {
-      const response = await client.api.workspaces[":workspaceId"]["$delete"]({
+      const response = await client.api.members[":memberId"]["$delete"]({
         param,
       });
       if (!response.ok) {
-        throw new Error("Failed to delete workspace");
+        throw new Error("Failed to delete member");
       }
       return await response.json();
     },
-    onSuccess: ({ data }) => {
-      toast.success("Workspace deleted");
-      queryClient.invalidateQueries({ queryKey: ["workspaces"] });
-      queryClient.invalidateQueries({ queryKey: ["workspace", data.$id] });
+    onSuccess: () => {
+      toast.success("Member deleted");
+      queryClient.invalidateQueries({ queryKey: ["members"] });
     },
     onError: () => {
-      toast.error("Failed to deleted workspace");
+      toast.error("Failed to deleted member");
     },
   });
 
